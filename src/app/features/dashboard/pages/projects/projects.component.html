@@ -1,0 +1,93 @@
+<div class="projects-container">
+  <div class="projects-header">
+    <div class="search-filters">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Projelerde Ara</mat-label>
+        <input matInput (input)="onSearch($event)" [value]="searchText">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-button-toggle-group [value]="selectedStatus" (change)="onStatusChange($event.value)">
+        <mat-button-toggle value="all">Tümü</mat-button-toggle>
+        <mat-button-toggle value="devam-ediyor">Devam Eden</mat-button-toggle>
+        <mat-button-toggle value="tamamlandı">Tamamlanan</mat-button-toggle>
+        <mat-button-toggle value="beklemede">Bekleyen</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="openProjectDialog()">
+      <mat-icon>add</mat-icon>
+      Yeni Proje
+    </button>
+  </div>
+
+  <div class="projects-grid">
+    <mat-card *ngFor="let project of displayedProjects" class="project-card">
+      <mat-card-header>
+        <mat-card-title>{{ project.title }}</mat-card-title>
+        <mat-card-subtitle>
+          <span [class]="'status-badge ' + project.status">
+            {{ project.status | titlecase }}
+          </span>
+        </mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <p class="description">{{ project.description }}</p>
+        
+        <mat-chip-set>
+          <mat-chip *ngFor="let tech of project.technologies">{{ tech }}</mat-chip>
+        </mat-chip-set>
+
+        <div class="project-links" *ngIf="project.githubUrl || project.liveLink">
+          <a *ngIf="project.githubUrl" 
+             [href]="project.githubUrl" 
+             target="_blank" 
+             (click)="$event.stopPropagation()"
+             mat-button>
+            <mat-icon>code</mat-icon>
+            GitHub
+          </a>
+          <a *ngIf="project.liveLink" 
+             [href]="project.liveLink" 
+             target="_blank"
+             (click)="$event.stopPropagation()"
+             mat-button>
+            <mat-icon>launch</mat-icon>
+            Demo
+          </a>
+        </div>
+
+        <mat-tab-group>
+          <mat-tab label="Detaylar">
+            <div class="project-details">
+              <div class="mentor-feedback" *ngIf="project.mentorFeedback">
+                <h4>
+                  <mat-icon>comment</mat-icon>
+                  Mentor Geri Bildirimi
+                </h4>
+                <p>{{ project.mentorFeedback }}</p>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Zaman Çizelgesi">
+            <app-project-timeline [projectId]="project.id"></app-project-timeline>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="openProjectDetail(project.id)">
+          <mat-icon>visibility</mat-icon>
+          Detaylar
+        </button>
+        <button mat-icon-button color="primary" (click)="editProject(project)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteProject(project.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div> 

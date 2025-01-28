@@ -1,0 +1,145 @@
+<div class="overview-container">
+    <!-- Quick Stats -->
+    <div class="stats-grid">
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-icon">
+            <mat-icon>code</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3>Toplam Proje</h3>
+            <p class="stat-value">8</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-icon">
+            <mat-icon>task_alt</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3>Tamamlanan</h3>
+            <p class="stat-value">6</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-icon">
+            <mat-icon>pending</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3>Devam Eden</h3>
+            <p class="stat-value">2</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-icon">
+            <mat-icon>emoji_events</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3>Başarı Puanı</h3>
+            <p class="stat-value">850</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  
+    <!-- Main Content Grid -->
+    <div class="content-grid">
+      <!-- Activity Chart -->
+      <mat-card class="chart-card">
+        <mat-card-header>
+          <mat-card-title>Aktivite Grafiği</mat-card-title>
+          <mat-card-subtitle>Son 12 aydaki commit aktivitesi</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [xaxis]="chartOptions.xaxis"
+            [stroke]="chartOptions.stroke"
+            [tooltip]="chartOptions.tooltip"
+            [dataLabels]="chartOptions.dataLabels"
+          ></apx-chart>
+        </mat-card-content>
+      </mat-card>
+  
+      <!-- Current Projects -->
+      <mat-card class="projects-card">
+        <mat-card-header>
+          <mat-card-title>Devam Eden Projeler</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="project-list">
+            <div class="project-item" *ngFor="let project of currentProjects">
+              <div class="project-header">
+                <h3>{{project.name}}</h3>
+                <p class="deadline">Teslim: {{project.deadline | date}}</p>
+              </div>
+              <div class="project-progress">
+                <mat-progress-bar mode="determinate" [value]="project.progress"></mat-progress-bar>
+                <span>%{{project.progress}}</span>
+              </div>
+              <div class="project-footer">
+                <div class="tech-stack">
+                  <mat-chip-set>
+                    <mat-chip *ngFor="let tech of project.tech">{{tech}}</mat-chip>
+                  </mat-chip-set>
+                </div>
+                <p class="mentor">Mentor: {{project.mentor}}</p>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+  
+      <!-- Right Side Content -->
+      <div class="right-column">
+        <!-- Upcoming Events -->
+        <mat-card class="events-card">
+          <mat-card-header>
+            <mat-card-title>Yaklaşan Etkinlikler</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="event-list">
+              <div class="event-item" *ngFor="let event of upcomingEvents">
+                <div class="event-date">
+                  <span class="day">{{event.date | date:'dd'}}</span>
+                  <span class="month">{{event.date | date:'MMM'}}</span>
+                </div>
+                <div class="event-details">
+                  <h4>{{event.title}}</h4>
+                  <p>{{event.time}} - {{event.type}}</p>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+  
+        <!-- Recent Messages -->
+        <mat-card class="messages-card">
+          <mat-card-header>
+            <mat-card-title>Son Mesajlar</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="message-list">
+              <div class="message-item" *ngFor="let message of recentMessages">
+                <div class="message-header">
+                  <span class="sender">{{message.from}}</span>
+                  <span class="role">{{message.role}}</span>
+                  <span class="time">{{message.time}}</span>
+                </div>
+                <p class="message-content">{{message.message}}</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div> 

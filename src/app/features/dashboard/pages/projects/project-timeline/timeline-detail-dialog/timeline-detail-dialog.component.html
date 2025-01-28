@@ -1,0 +1,76 @@
+<div class="timeline-detail-dialog">
+  <h2 mat-dialog-title>Proje Zaman Çizelgesi</h2>
+  
+  <mat-dialog-content>
+    <div class="progress-section">
+      <h3>Genel İlerleme</h3>
+      <div class="progress-bar">
+        <div class="progress" [style.width.%]="data.progress">
+          <span class="progress-text">%{{data.progress}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestones-section">
+      <h3>Kilometre Taşları</h3>
+      <div class="milestone-cards">
+        <mat-card *ngFor="let milestone of data.milestones" [class.completed]="milestone.completed">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>{{ milestone.completed ? 'check_circle' : 'pending' }}</mat-icon>
+            <mat-card-title>{{ milestone.title }}</mat-card-title>
+            <mat-card-subtitle>{{ milestone.dueDate | date:'mediumDate' }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ milestone.description }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="timeline-section">
+      <h3>Detaylı Zaman Çizelgesi</h3>
+      <div class="detailed-timeline">
+        <div *ngFor="let event of data.events" class="timeline-event">
+          <div class="event-date">
+            <div class="date">{{ event.date | date:'dd MMM' }}</div>
+            <div class="time">{{ event.date | date:'HH:mm' }}</div>
+          </div>
+          
+          <div class="event-connector">
+            <div class="event-dot" [style.background-color]="getEventColor(event.type)">
+              <mat-icon>{{ getEventIcon(event.type) }}</mat-icon>
+            </div>
+          </div>
+          
+          <mat-card class="event-card">
+            <mat-card-header>
+              <div mat-card-avatar>
+                <mat-icon [style.color]="getEventColor(event.type)">
+                  {{ getEventIcon(event.type) }}
+                </mat-icon>
+              </div>
+              <mat-card-title>{{ event.title }}</mat-card-title>
+              <mat-card-subtitle>{{ event.userType === 'mentor' ? 'Mentor' : 'Öğrenci' }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>{{ event.description }}</p>
+              <div *ngIf="event.type === 'milestone' && event.milestone" class="milestone-status">
+                <mat-chip-set>
+                  <mat-chip-option [color]="event.milestone.completed ? 'primary' : undefined" 
+                                   [selected]="event.milestone.completed"
+                                   disabled>
+                    {{ event.milestone.completed ? 'Tamamlandı' : 'Devam Ediyor' }}
+                  </mat-chip-option>
+                </mat-chip-set>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Kapat</button>
+  </mat-dialog-actions>
+</div> 

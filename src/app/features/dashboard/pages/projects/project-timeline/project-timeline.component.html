@@ -1,0 +1,56 @@
+<div class="timeline-container">
+  <mat-card class="milestones-card">
+    <mat-card-header>
+      <mat-card-title>Proje İlerlemesi</mat-card-title>
+      <mat-card-subtitle>{{ progress }}% Tamamlandı</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+      
+      <div class="milestones-list">
+        <div *ngFor="let milestone of milestones" class="milestone-item">
+          <button mat-icon-button [color]="milestone.completed ? 'primary' : ''" (click)="toggleMilestone(milestone)">
+            <mat-icon>{{ milestone.completed ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+          </button>
+          <div class="milestone-content">
+            <h3>{{ milestone.title }}</h3>
+            <p>{{ milestone.description }}</p>
+            <small>Bitiş: {{ milestone.dueDate | date }}</small>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="timeline-card">
+    <mat-card-header>
+      <mat-card-title>Zaman Çizelgesi</mat-card-title>
+      <button mat-icon-button color="primary" (click)="openDetailedTimeline()" matTooltip="Detaylı görünüm">
+        <mat-icon>fullscreen</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="timeline">
+        <div *ngFor="let event of events" class="timeline-event">
+          <div class="event-icon">
+            <mat-icon [ngClass]="event.type">{{ getEventIcon(event.type) }}</mat-icon>
+          </div>
+          <div class="event-content">
+            <div class="event-header">
+              <h3>{{ event.title }}</h3>
+              <span class="event-date">{{ event.date | date:'short' }}</span>
+            </div>
+            <p>{{ event.description }}</p>
+            <mat-chip-set *ngIf="event.type === 'milestone' && event.milestone">
+              <mat-chip-option [color]="event.milestone.completed ? 'primary' : undefined" 
+                              [selected]="event.milestone.completed"
+                              [disabled]="true">
+                {{ event.milestone.completed ? 'Tamamlandı' : 'Devam Ediyor' }}
+              </mat-chip-option>
+            </mat-chip-set>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div> 

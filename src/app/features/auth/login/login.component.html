@@ -1,0 +1,56 @@
+<div class="login-container">
+  <div class="login-illustration"></div>
+  
+  <div class="login-content">
+    <mat-card class="login-card">
+      <div class="login-header">
+        <h1>Hoş Geldiniz</h1>
+        <p>Staj portalına giriş yapın</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>E-posta</mat-label>
+          <input matInput formControlName="email" type="email">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+            E-posta zorunludur
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+            Geçerli bir e-posta adresi giriniz
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Şifre</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+          <mat-icon matPrefix>lock</mat-icon>
+          <mat-icon matSuffix (click)="hidePassword = !hidePassword" class="cursor-pointer">
+            {{hidePassword ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            Şifre zorunludur
+          </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <mat-checkbox color="primary">Beni hatırla</mat-checkbox>
+          <a href="#" class="forgot-password">Şifremi unuttum</a>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" class="login-button" 
+                [disabled]="!loginForm.valid">
+          <span>Giriş Yap</span>
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+
+        <div class="register-link">
+          <span>Hesabınız yok mu?</span>
+          <button mat-button color="accent" type="button" (click)="goToRegister()">
+            Kayıt Ol
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

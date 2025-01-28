@@ -1,0 +1,140 @@
+.timeline-detail-dialog {
+  .progress-section {
+    margin-bottom: 2rem;
+
+    .progress-bar {
+      height: 24px;
+      background: #f5f5f5;
+      border-radius: 12px;
+      overflow: hidden;
+
+      .progress {
+        height: 100%;
+        background: linear-gradient(45deg, #2196f3, #1976d2);
+        border-radius: 12px;
+        position: relative;
+        transition: width 0.3s ease;
+
+        .progress-text {
+          position: absolute;
+          right: 8px;
+          color: white;
+          font-weight: 500;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+
+  .milestones-section {
+    margin-bottom: 2rem;
+
+    .milestone-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+
+      mat-card {
+        transition: all 0.3s ease;
+
+        &.completed {
+          background: #e8f5e9;
+
+          mat-icon {
+            color: #4caf50;
+          }
+        }
+
+        mat-card-header {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .timeline-section {
+    .detailed-timeline {
+      .timeline-event {
+        display: grid;
+        grid-template-columns: 80px 50px 1fr;
+        gap: 0;
+        margin-bottom: 2rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .event-date {
+          text-align: right;
+          padding-right: 1rem;
+          
+          .date {
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.87);
+          }
+          
+          .time {
+            font-size: 0.875rem;
+            color: rgba(0, 0, 0, 0.6);
+          }
+        }
+
+        .event-connector {
+          position: relative;
+
+          &::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: -2rem;
+            width: 2px;
+            background: #e0e0e0;
+            transform: translateX(-50%);
+          }
+
+          .event-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            background: white;
+            border: 2px solid;
+
+            mat-icon {
+              font-size: 20px;
+              width: 20px;
+              height: 20px;
+              color: white;
+            }
+          }
+        }
+
+        .event-card {
+          padding: 1rem;
+
+          mat-card-header {
+            margin-bottom: 0.5rem;
+          }
+
+          .milestone-status {
+            margin-top: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .timeline-detail-dialog {
+    .mat-mdc-dialog-content {
+      max-height: 80vh;
+      padding: 1rem;
+    }
+  }
+} 

@@ -1,0 +1,16 @@
+<div class="code-editor-container">
+  <div class="editor-section">
+    <h2>Kod Editörü</h2>
+    <ngx-monaco-editor
+      class="code-editor"
+      [(ngModel)]="code"
+      [options]="editorOptions"
+    ></ngx-monaco-editor>
+    <button class="run-button" (click)="runCode()">Kodu Çalıştır</button>
+  </div>
+  
+  <div class="result-section">
+    <h3>Sonuç:</h3>
+    <pre>{{ output }}</pre>
+  </div>
+</div> 

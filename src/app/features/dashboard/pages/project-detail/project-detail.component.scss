@@ -1,0 +1,139 @@
+.statistics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+
+  .stat-card {
+    .mat-mdc-card-content {
+      display: flex;
+      align-items: center;
+      padding: 1.5rem;
+    }
+
+    .stat-icon {
+      background: rgba(63, 81, 181, 0.1);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+
+      mat-icon {
+        color: #3f51b5;
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .stat-info {
+      h3 {
+        margin: 0;
+        font-size: 0.9rem;
+        color: rgba(0,0,0,0.6);
+      }
+
+      .stat-value {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #2c3e50;
+      }
+    }
+  }
+}
+
+.charts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.activity-log {
+  .log-list {
+    padding: 1rem 0;
+
+    .log-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .log-icon {
+        margin-right: 1rem;
+
+        mat-icon {
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+
+          &.commit { color: #4caf50; }
+          &.milestone { color: #2196f3; }
+          &.feedback { color: #ff9800; }
+          &.update { color: #9c27b0; }
+        }
+      }
+
+      .log-content {
+        flex: 1;
+
+        .log-text {
+          margin: 0;
+          color: rgba(0,0,0,0.87);
+        }
+
+        .log-date {
+          font-size: 0.85rem;
+          color: rgba(0,0,0,0.6);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .statistics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .charts-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+
+  mat-card {
+    mat-card-content {
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      > div {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.project-detail-container {
+  .project-tabs {
+    .tab-content {
+      padding: 1rem;
+      min-height: 400px;
+    }
+  }
+} 

@@ -1,0 +1,79 @@
+<div class="messages-container">
+  <div class="messages-list" #messagesList>
+    <div *ngFor="let message of messages$ | async; trackBy: trackByMessageId" 
+         class="message-item"
+         [class.own-message]="message.senderId === currentUserId">
+      
+      <div class="message-avatar">
+        <img [src]="message.senderAvatar || 'assets/default-avatar.png'" 
+             [alt]="message.senderType === 'mentor' ? 'Mentör' : 'Öğrenci'">
+      </div>
+
+      <div class="message-bubble">
+        <div class="message-info">
+          <span class="sender-name">{{ message.senderType === 'mentor' ? 'Mentör' : 'Öğrenci' }}</span>
+          <span class="message-time">{{ message.timestamp | date:'HH:mm' }}</span>
+        </div>
+
+        <!-- Alıntılanan Mesaj -->
+        <div *ngIf="message.quotedMessageId" class="quoted-message">
+          <div class="quoted-content">
+            <small class="quoted-sender">{{ getQuotedMessage(message.quotedMessageId)?.senderType === 'mentor' ? 'Mentör' : 'Öğrenci' }}</small>
+            <p>{{ getQuotedMessage(message.quotedMessageId)?.message }}</p>
+          </div>
+        </div>
+        
+        <div class="message-text">
+          {{ message.message }}
+        </div>
+
+        <div class="message-footer">
+          <div *ngIf="message.attachments?.length" class="attachments">
+            <mat-icon>attach_file</mat-icon>
+            <span *ngFor="let file of message.attachments">{{ file }}</span>
+          </div>
+
+          <button mat-icon-button class="quote-button" (click)="quoteMessage(message)" matTooltip="Yanıtla">
+            <mat-icon>reply</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alıntı Preview -->
+  <div *ngIf="quotedMessage" class="quote-preview">
+    <div class="quote-content">
+      <div class="quote-info">
+        <mat-icon>reply</mat-icon>
+        <span>{{ quotedMessage.senderType === 'mentor' ? 'Mentör' : 'Öğrenci' }}'e yanıt</span>
+      </div>
+      <p>{{ quotedMessage.message }}</p>
+    </div>
+    <button mat-icon-button (click)="cancelQuote()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="message-input">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Mesajınız</mat-label>
+      <textarea matInput 
+                [(ngModel)]="newMessage" 
+                placeholder="Bir mesaj yazın..."
+                rows="3"></textarea>
+    </mat-form-field>
+    
+    <div class="message-actions">
+      <button mat-icon-button (click)="attachFile()" matTooltip="Dosya Ekle">
+        <mat-icon>attach_file</mat-icon>
+      </button>
+      <button mat-raised-button 
+              color="primary" 
+              [disabled]="!newMessage.trim()"
+              (click)="sendMessage()">
+        Gönder
+      </button>
+    </div>
+  </div>
+</div> 

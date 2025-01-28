@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+:root {
+  --primary-color: #4f46e5;
+  --primary-light: #818cf8;
+  --secondary-color: #6366f1;
+  --accent-color: #8b5cf6;
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --background-light: #f9fafb;
+  --white: #ffffff;
+}
+
+html, body { 
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  background-color: var(--background-light);
+}
+
+.mat-mdc-button, .mat-mdc-raised-button {
+  transition: all 0.3s ease-in-out !important;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+}
+
+.mat-mdc-form-field {
+  transition: all 0.3s ease-in-out;
+  
+  &:focus-within {
+    transform: scale(1.02);
+  }
+}

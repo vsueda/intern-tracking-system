@@ -1,0 +1,83 @@
+<div class="project-detail-container" *ngIf="project">
+  <mat-card class="project-header">
+    <mat-card-header>
+      <mat-card-title>{{ project.title }}</mat-card-title>
+      <mat-card-subtitle>
+        <mat-chip-set>
+          <mat-chip [class]="project.status">{{ project.status }}</mat-chip>
+          <mat-chip *ngFor="let tech of project.technologies">{{ tech }}</mat-chip>
+        </mat-chip-set>
+      </mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <p class="project-description">{{ project.description }}</p>
+      
+      <div class="project-meta">
+        <div class="meta-item">
+          <mat-icon>calendar_today</mat-icon>
+          <span>Başlangıç: {{ project.startDate | date }}</span>
+        </div>
+        <div class="meta-item">
+          <mat-icon>event</mat-icon>
+          <span>Bitiş: {{ project.endDate | date }}</span>
+        </div>
+        <div class="meta-item">
+          <mat-icon>code</mat-icon>
+          <a [href]="project.githubUrl" target="_blank">GitHub Repo</a>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-tab-group class="project-tabs" animationDuration="0ms">
+    <mat-tab label="Süreç">
+      <div class="tab-content">
+        <app-project-timeline [projectId]="project.id"></app-project-timeline>
+      </div>
+    </mat-tab>
+    
+    <mat-tab label="Mesajlar">
+      <div class="tab-content">
+        <app-project-messages [projectId]="project.id"></app-project-messages>
+      </div>
+    </mat-tab>
+    
+    <mat-tab label="Detaylar">
+      <div class="tab-content project-details">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Proje Detayları</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="details-grid">
+              <div class="detail-item">
+                <h4>Teknolojiler</h4>
+                <mat-chip-set>
+                  <mat-chip *ngFor="let tech of project.technologies">
+                    {{ tech }}
+                  </mat-chip>
+                </mat-chip-set>
+              </div>
+              
+              <div class="detail-item">
+                <h4>Durum</h4>
+                <mat-chip [class]="project.status">
+                  {{ project.status }}
+                </mat-chip>
+              </div>
+              
+              <div class="detail-item">
+                <h4>GitHub</h4>
+                <button mat-button color="primary" (click)="openGithub()">
+                  <mat-icon>open_in_new</mat-icon>
+                  Repository'yi Aç
+                </button>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div> 

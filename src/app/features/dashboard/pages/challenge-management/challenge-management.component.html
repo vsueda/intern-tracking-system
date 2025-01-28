@@ -1,0 +1,71 @@
+<div class="challenge-management">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Yeni Soru Ekle</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="challengeForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Başlık</mat-label>
+          <input matInput formControlName="title">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Açıklama</mat-label>
+          <textarea matInput formControlName="description" rows="3"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Zorluk</mat-label>
+          <mat-select formControlName="difficulty">
+            <mat-option value="Kolay">Kolay</mat-option>
+            <mat-option value="Orta">Orta</mat-option>
+            <mat-option value="Zor">Zor</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Kategori</mat-label>
+          <input matInput formControlName="category">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Başlangıç Kodu</mat-label>
+          <textarea matInput formControlName="starterCode" rows="5"></textarea>
+        </mat-form-field>
+
+        <div formArrayName="testCases">
+          <h3>Test Senaryoları</h3>
+          <div *ngFor="let testCase of testCases.controls; let i=index" [formGroupName]="i">
+            <mat-form-field appearance="outline">
+              <mat-label>Girdi (JSON formatında)</mat-label>
+              <input matInput formControlName="input">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Beklenen Çıktı</mat-label>
+              <input matInput formControlName="expectedOutput">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Açıklama</mat-label>
+              <input matInput formControlName="description">
+            </mat-form-field>
+
+            <button mat-icon-button color="warn" type="button" (click)="removeTestCase(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+          <button mat-button type="button" (click)="addTestCase()">
+            Test Senaryosu Ekle
+          </button>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="!challengeForm.valid">
+          Kaydet
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> 

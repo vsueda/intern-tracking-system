@@ -1,0 +1,71 @@
+<div class="project-detail-container" *ngIf="project">
+  <mat-card class="project-header">
+    <!-- Mevcut header kısmı -->
+    <mat-card-header>
+      <mat-card-title>{{ project.title }}</mat-card-title>
+      <mat-card-subtitle>
+        <mat-chip-set>
+          <mat-chip [class]="project.status">{{ project.status }}</mat-chip>
+          <mat-chip *ngFor="let tech of project.technologies">{{ tech }}</mat-chip>
+        </mat-chip-set>
+      </mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <!-- Mevcut meta bilgileri -->
+    </mat-card-content>
+  </mat-card>
+
+  <mat-tab-group class="project-tabs" animationDuration="0ms">
+    <!-- Mevcut tablar -->
+    <mat-tab label="Süreç">
+      <div class="tab-content">
+        <app-project-timeline [projectId]="project.id"></app-project-timeline>
+      </div>
+    </mat-tab>
+    
+    <mat-tab label="Mesajlar">
+      <div class="tab-content">
+        <app-project-messages [projectId]="project.id"></app-project-messages>
+      </div>
+    </mat-tab>
+    
+    <mat-tab label="Detaylar">
+      <div class="tab-content project-details">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Proje Detayları</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="details-grid">
+              <div class="detail-item">
+                <h4>Teknolojiler</h4>
+                <mat-chip-set>
+                  <mat-chip *ngFor="let tech of project.technologies">
+                    {{ tech }}
+                  </mat-chip>
+                </mat-chip-set>
+              </div>
+              
+              <div class="detail-item">
+                <h4>Durum</h4>
+                <mat-chip [class]="project.status">
+                  {{ project.status }}
+                </mat-chip>
+              </div>
+              
+              <!-- Diğer detay öğeleri -->
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+    <!-- İstatistikler tabı -->
+    <mat-tab label="İstatistikler">
+      <div class="tab-content">
+        <app-project-charts [projectId]="project.id"></app-project-charts>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div> 

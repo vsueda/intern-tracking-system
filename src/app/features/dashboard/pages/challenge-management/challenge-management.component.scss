@@ -1,0 +1,13 @@
+.challenge-management {
+  padding: 1rem;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
+} 
