@@ -1,0 +1,109 @@
+<div class="kanban-container">
+  <div class="kanban-column" cdkDropList #todoList="cdkDropList" 
+       [cdkDropListData]="todo" 
+       [cdkDropListConnectedTo]="[inProgressList, doneList]"
+       (cdkDropListDropped)="drop($event)">
+    <div class="column-header">
+      <h2>Yapılacaklar</h2>
+      <span class="task-count">{{todo.length}}</span>
+    </div>
+    
+    <div class="kanban-items">
+      <div class="kanban-item" *ngFor="let item of todo" cdkDrag>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{item.title}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{item.description}}</p>
+            <div class="item-footer">
+              <span class="assignee">
+                <mat-icon>person</mat-icon>
+                {{item.assignee}}
+              </span>
+              <span class="due-date">
+                <mat-icon>event</mat-icon>
+                {{item.dueDate | date}}
+              </span>
+              <span class="priority" [class]="item.priority.toLowerCase()">
+                {{item.priority}}
+              </span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- Devam Edenler Kolonu -->
+  <div class="kanban-column" cdkDropList #inProgressList="cdkDropList"
+       [cdkDropListData]="inProgress" 
+       [cdkDropListConnectedTo]="[todoList, doneList]"
+       (cdkDropListDropped)="drop($event)">
+    <div class="column-header">
+      <h2>Devam Edenler</h2>
+      <span class="task-count">{{inProgress.length}}</span>
+    </div>
+    <div class="kanban-items">
+      <div class="kanban-item" *ngFor="let item of inProgress" cdkDrag>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{item.title}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{item.description}}</p>
+            <div class="item-footer">
+              <span class="assignee">
+                <mat-icon>person</mat-icon>
+                {{item.assignee}}
+              </span>
+              <span class="due-date">
+                <mat-icon>event</mat-icon>
+                {{item.dueDate | date}}
+              </span>
+              <span class="priority" [class]="item.priority.toLowerCase()">
+                {{item.priority}}
+              </span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tamamlananlar Kolonu -->
+  <div class="kanban-column" cdkDropList #doneList="cdkDropList"
+       [cdkDropListData]="done" 
+       [cdkDropListConnectedTo]="[todoList, inProgressList]"
+       (cdkDropListDropped)="drop($event)">
+    <div class="column-header">
+      <h2>Tamamlananlar</h2>
+      <span class="task-count">{{done.length}}</span>
+    </div>
+    <div class="kanban-items">
+      <div class="kanban-item" *ngFor="let item of done" cdkDrag>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{item.title}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{item.description}}</p>
+            <div class="item-footer">
+              <span class="assignee">
+                <mat-icon>person</mat-icon>
+                {{item.assignee}}
+              </span>
+              <span class="due-date">
+                <mat-icon>event</mat-icon>
+                {{item.dueDate | date}}
+              </span>
+              <span class="priority" [class]="item.priority.toLowerCase()">
+                {{item.priority}}
+              </span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div> 

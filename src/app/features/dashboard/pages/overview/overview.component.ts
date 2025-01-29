@@ -14,6 +14,7 @@ import {
   ApexTooltip,
   ApexDataLabels
 } from 'ng-apexcharts';
+import { KanbanBoardComponent } from '../kanban-board/kanban-board.component';
 
 export interface ChartOptions {
   series: ApexAxisChartSeries;
@@ -34,7 +35,8 @@ export interface ChartOptions {
     MatButtonModule,
     MatProgressBarModule,
     MatChipsModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    KanbanBoardComponent
   ],
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss']

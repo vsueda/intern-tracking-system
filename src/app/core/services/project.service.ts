@@ -20,7 +20,8 @@ export class ProjectService {
       mentorId: '1',
       mentorFeedback: 'Proje iyi ilerliyor, authentication kısmında güvenlik önlemlerini artırmalıyız.',
       startDate: new Date('2024-03-01'),
-      endDate: new Date('2024-06-01')
+      endDate: new Date('2024-06-01'),
+      deadline: new Date('2024-06-01')
     },
     {
       id: '2',
@@ -35,7 +36,8 @@ export class ProjectService {
       studentId: '1',
       mentorId: '2',
       startDate: new Date('2024-02-01'),
-      endDate: new Date('2024-02-28')
+      endDate: new Date('2024-02-28'),
+      deadline: new Date('2024-02-28')
     }
   ];
 

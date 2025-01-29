@@ -1,4 +1,5 @@
 export interface Project {
+  deadline: string | number | Date;
   id: string;
   title: string;
   description: string;
@@ -15,4 +16,5 @@ export interface Project {
   createdAt?: Date;
   updatedAt?: Date;
   mentorFeedback?: string;
+  mentor?: string;
 } 

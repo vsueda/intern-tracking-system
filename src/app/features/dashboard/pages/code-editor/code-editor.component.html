@@ -1,16 +1,73 @@
 <div class="code-editor-container">
+  <mat-card class="question-card">
+    <mat-card-header>
+      <mat-form-field>
+        <mat-label>Soru Seç</mat-label>
+        <mat-select [(value)]="currentQuestion.id" (selectionChange)="selectQuestion($event.value)">
+          <mat-option *ngFor="let question of questions" [value]="question.id">
+            {{question.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-header>
+    <mat-card-content>
+      <h2>{{ currentQuestion.title }}</h2>
+      <p>{{ currentQuestion.description }}</p>
+    </mat-card-content>
+  </mat-card>
+
   <div class="editor-section">
-    <h2>Kod Editörü</h2>
-    <ngx-monaco-editor
-      class="code-editor"
-      [(ngModel)]="code"
-      [options]="editorOptions"
-    ></ngx-monaco-editor>
-    <button class="run-button" (click)="runCode()">Kodu Çalıştır</button>
+    <div class="editor-header">
+      <h2>Kod Editörü</h2>
+      <mat-form-field>
+        <mat-label>Programlama Dili</mat-label>
+        <mat-select [(ngModel)]="selectedLanguage" (selectionChange)="onLanguageChange()">
+          <mat-option *ngFor="let lang of languages" [value]="lang.value">
+            {{lang.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="isBrowser">
+      <ngx-monaco-editor
+        class="code-editor"
+        [(ngModel)]="code"
+        [options]="editorOptions"
+      ></ngx-monaco-editor>
+    </div>
+    
+    <button mat-raised-button color="primary" (click)="runCode()">
+      Kodu Çalıştır ve Test Et
+    </button>
   </div>
   
-  <div class="result-section">
-    <h3>Sonuç:</h3>
-    <pre>{{ output }}</pre>
+  <div class="output-section">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Çıktı</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <pre>{{ output }}</pre>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="test-results">
+      <mat-card-header>
+        <mat-card-title>Test Sonuçları</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngFor="let test of testResults" class="test-case">
+          <div class="test-header" [class.passed]="test.passed" [class.failed]="!test.passed">
+            <span>Test {{ test.passed ? 'Başarılı' : 'Başarısız' }}</span>
+          </div>
+          <div class="test-details">
+            <p>Girdi: {{ test.input }}</p>
+            <p>Beklenen Çıktı: {{ test.expectedOutput }}</p>
+            <p>Gerçek Çıktı: {{ test.actualOutput }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div> 
