@@ -1,0 +1,93 @@
+.task-management-container {
+  padding: 1rem;
+  
+  .tab-content {
+    padding: 2rem;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+  }
+
+  ::ng-deep .mat-tab-body-content {
+    padding: 1rem 0;
+  }
+}
+
+.task-list-container {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h2 {
+      margin: 0;
+      color: rgba(0,0,0,0.87);
+    }
+  }
+}
+
+.task-table {
+  width: 100%;
+
+  .mat-mdc-row {
+    &:hover {
+      background: rgba(0,0,0,0.04);
+    }
+  }
+
+  .task-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    strong {
+      color: rgba(0,0,0,0.87);
+    }
+
+    small {
+      color: rgba(0,0,0,0.6);
+    }
+  }
+
+  .assignee {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(0,0,0,0.87);
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .progress-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    mat-progress-bar {
+      width: 100px;
+    }
+
+    span {
+      min-width: 45px;
+      text-align: right;
+      color: rgba(0,0,0,0.6);
+    }
+  }
+
+  .mat-mdc-chip {
+    min-height: 24px;
+    font-size: 12px;
+  }
+} 

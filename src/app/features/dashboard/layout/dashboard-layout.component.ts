@@ -30,6 +30,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
             <mat-icon matListItemIcon>folder</mat-icon>
             <span matListItemTitle>Projeler</span>
           </a>
+          <a mat-list-item routerLink="/dashboard/tasks" routerLinkActive="active">
+            <mat-icon matListItemIcon>assignment</mat-icon>
+            <span matListItemTitle>İş Takibi</span>
+          </a>
           <a mat-list-item routerLink="/dashboard/code-challenge" routerLinkActive="active">
             <mat-icon matListItemIcon>code</mat-icon>
             <span matListItemTitle>Kod Challenge</span>

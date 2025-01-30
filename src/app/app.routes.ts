@@ -55,6 +55,11 @@ export const routes: Routes = [
         path: 'code-challenge', 
         loadComponent: () => import('./features/dashboard/pages/code-editor/code-editor.component')
           .then(m => m.CodeEditorComponent) 
+      },
+      { 
+        path: 'tasks', 
+        loadComponent: () => import('./features/dashboard/pages/task-management/task-management.component')
+          .then(m => m.TaskManagementComponent) 
       }
     ]
   }

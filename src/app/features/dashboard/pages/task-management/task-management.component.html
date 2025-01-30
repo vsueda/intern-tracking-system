@@ -1,0 +1,103 @@
+<div class="task-management-container">
+  <mat-tab-group>
+    <mat-tab label="Görev Takibi">
+      <app-task-tracker></app-task-tracker>
+    </mat-tab>
+    <mat-tab label="Kanban Tahtası">
+      <app-kanban-board></app-kanban-board>
+    </mat-tab>
+    <mat-tab label="Görev Listesi">
+      <div class="task-list-container">
+        <div class="table-header">
+          <h2>Görevler</h2>
+          <button mat-raised-button color="primary" (click)="addTask()">
+            <mat-icon>add</mat-icon>
+            Yeni Görev
+          </button>
+        </div>
+        
+        <table mat-table [dataSource]="tasks" class="task-table">
+          <!-- Başlık Kolonu -->
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Görev</th>
+            <td mat-cell *matCellDef="let task">
+              <div class="task-title">
+                <strong>{{task.title}}</strong>
+                <small>{{task.description}}</small>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Atanan Kişi Kolonu -->
+          <ng-container matColumnDef="assignee">
+            <th mat-header-cell *matHeaderCellDef>Atanan</th>
+            <td mat-cell *matCellDef="let task">
+              <div class="assignee">
+                <mat-icon>person</mat-icon>
+                {{task.assignee}}
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Bitiş Tarihi Kolonu -->
+          <ng-container matColumnDef="dueDate">
+            <th mat-header-cell *matHeaderCellDef>Bitiş Tarihi</th>
+            <td mat-cell *matCellDef="let task">
+              {{task.dueDate | date}}
+            </td>
+          </ng-container>
+
+          <!-- Durum Kolonu -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Durum</th>
+            <td mat-cell *matCellDef="let task">
+              <mat-chip [style.background-color]="getStatusColor(task.status)">
+                {{task.status}}
+              </mat-chip>
+            </td>
+          </ng-container>
+
+          <!-- Öncelik Kolonu -->
+          <ng-container matColumnDef="priority">
+            <th mat-header-cell *matHeaderCellDef>Öncelik</th>
+            <td mat-cell *matCellDef="let task">
+              <mat-chip [color]="getPriorityColor(task.priority)" selected>
+                {{task.priority}}
+              </mat-chip>
+            </td>
+          </ng-container>
+
+          <!-- İlerleme Kolonu -->
+          <ng-container matColumnDef="progress">
+            <th mat-header-cell *matHeaderCellDef>İlerleme</th>
+            <td mat-cell *matCellDef="let task">
+              <div class="progress-cell">
+                <mat-progress-bar mode="determinate" [value]="task.progress"></mat-progress-bar>
+                <span>{{task.progress}}%</span>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- İşlemler Kolonu -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>İşlemler</th>
+            <td mat-cell *matCellDef="let task">
+              <button mat-icon-button color="primary" (click)="editTask(task)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteTask(task)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-tab>
+    <mat-tab label="Raporlar">
+      <app-task-reports></app-task-reports>
+    </mat-tab>
+  </mat-tab-group>
+</div> 

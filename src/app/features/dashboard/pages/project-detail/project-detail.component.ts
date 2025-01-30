@@ -21,6 +21,7 @@ import {
   ApexNonAxisChartSeries
 } from 'ng-apexcharts';
 import { ProjectChartsComponent } from '../../components/project-charts/project-charts.component';
+import { ProjectGanttComponent } from '../../components/project-gantt/project-gantt.component';
 
 interface ActivityLog {
   id: string;
@@ -53,7 +54,8 @@ export type ChartOptions = {
     ProjectTimelineComponent,
     ProjectMessagesComponent,
     NgApexchartsModule,
-    ProjectChartsComponent
+    ProjectChartsComponent,
+    ProjectGanttComponent
   ],
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.scss']

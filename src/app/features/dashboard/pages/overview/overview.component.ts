@@ -15,6 +15,7 @@ import {
   ApexDataLabels
 } from 'ng-apexcharts';
 import { KanbanBoardComponent } from '../kanban-board/kanban-board.component';
+import { TaskTrackerComponent } from '../../components/task-tracker/task-tracker.component';
 
 export interface ChartOptions {
   series: ApexAxisChartSeries;
@@ -36,7 +37,8 @@ export interface ChartOptions {
     MatProgressBarModule,
     MatChipsModule,
     NgApexchartsModule,
-    KanbanBoardComponent
+    KanbanBoardComponent,
+    TaskTrackerComponent
   ],
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss']

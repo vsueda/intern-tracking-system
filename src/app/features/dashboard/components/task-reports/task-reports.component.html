@@ -1,0 +1,139 @@
+<div class="reports-container">
+  <!-- Performans Metrikleri -->
+  <div class="metrics-grid">
+    <mat-card *ngFor="let metric of performanceMetrics" class="metric-card">
+      <mat-card-content>
+        <div class="metric-icon">
+          <mat-icon [style.color]="metric.color">{{metric.icon}}</mat-icon>
+        </div>
+        <div class="metric-details">
+          <h3>{{metric.title}}</h3>
+          <div class="metric-value">
+            {{metric.value}}
+            <span class="trend" [class.positive]="metric.trend.startsWith('+')"
+                               [class.negative]="metric.trend.startsWith('-')">
+              {{metric.trend}}
+            </span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Grafikler -->
+  <div class="charts-grid">
+    <!-- Görev Durumu Dağılımı -->
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Görev Durumu Dağılımı</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div id="chart">
+          <apx-chart
+            [series]="pieOptions.series"
+            [chart]="pieOptions.chart"
+            [labels]="pieOptions.labels"
+            [colors]="pieOptions.colors"
+            [responsive]="pieOptions.responsive">
+          </apx-chart>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Görev Trendleri -->
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Görev Trendleri</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div id="chart">
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [xaxis]="chartOptions.xaxis"
+            [stroke]="chartOptions.stroke"
+            [tooltip]="chartOptions.tooltip"
+            [dataLabels]="chartOptions.dataLabels">
+          </apx-chart>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Öncelik Dağılımı -->
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Öncelik Dağılımı</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div id="chart">
+          <apx-chart
+            [series]="barOptions.series"
+            [chart]="barOptions.chart"
+            [plotOptions]="barOptions.plotOptions"
+            [xaxis]="barOptions.xaxis"
+            [colors]="barOptions.colors"
+            [dataLabels]="barOptions.dataLabels">
+          </apx-chart>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Detaylı Performans Metrikleri -->
+  <div class="detailed-metrics">
+    <mat-card *ngFor="let metric of detailedMetrics">
+      <mat-card-header>
+        <div class="metric-icon">
+          <mat-icon>{{metric.icon}}</mat-icon>
+        </div>
+        <mat-card-title>{{metric.title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="main-value">
+          {{metric.value}}
+          <span class="trend" [class.positive]="metric.trend.startsWith('+')"
+                             [class.negative]="metric.trend.startsWith('-')">
+            {{metric.trend}}
+          </span>
+        </div>
+        <div class="details-list">
+          <div class="detail-item" *ngFor="let detail of metric.details">
+            <span class="label">{{detail.label}}</span>
+            <span class="value">{{detail.value}}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Departman Dağılımı -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Departman Bazlı Görev Dağılımı</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <apx-chart
+        [series]="departmentChartOptions.series"
+        [chart]="departmentChartOptions.chart"
+        [plotOptions]="departmentChartOptions.plotOptions"
+        [colors]="departmentChartOptions.colors"
+        [xaxis]="departmentChartOptions.xaxis">
+      </apx-chart>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Zaman Analizi -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Görev Tamamlama Süreleri</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <apx-chart
+        [series]="timeAnalysisChartOptions.series"
+        [chart]="timeAnalysisChartOptions.chart"
+        [stroke]="timeAnalysisChartOptions.stroke"
+        [xaxis]="timeAnalysisChartOptions.xaxis">
+      </apx-chart>
+    </mat-card-content>
+  </mat-card>
+</div> 

@@ -1,0 +1,50 @@
+<mat-card class="task-tracker">
+  <mat-card-header>
+    <mat-card-title>İş Takibi</mat-card-title>
+    <mat-card-subtitle>Güncel Durum</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="metrics-grid">
+      <div *ngFor="let metric of metrics" 
+           class="metric-card" 
+           [style.border-left-color]="metric.color">
+        <div class="metric-header">
+          <mat-icon [style.color]="metric.color">{{metric.icon}}</mat-icon>
+          <span class="metric-count">{{metric.count}}</span>
+        </div>
+        <div class="metric-title">{{metric.title}}</div>
+        <div class="metric-trend" [class]="metric.trend">
+          <mat-icon>
+            {{metric.trend === 'up' ? 'trending_up' : 
+              metric.trend === 'down' ? 'trending_down' : 'trending_flat'}}
+          </mat-icon>
+          <span>{{metric.percentage}}%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="active-tasks">
+      <h3>Aktif Görevler</h3>
+      <div class="task-list">
+        <div *ngFor="let task of activeTasks" 
+             class="task-item"
+             [class]="'priority-' + task.priority">
+          <div class="task-info">
+            <h4>{{task.title}}</h4>
+            <p>{{task.description}}</p>
+            <small>Bitiş: {{task.dueDate | date}}</small>
+          </div>
+          <div class="task-progress">
+            <mat-progress-bar 
+              mode="determinate" 
+              [value]="task.progress"
+              [matTooltip]="task.progress + '%'">
+            </mat-progress-bar>
+            <span class="progress-text">{{task.progress}}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card> 
