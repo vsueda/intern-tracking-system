@@ -14,6 +14,7 @@ import { KanbanBoardComponent } from '../kanban-board/kanban-board.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskDialogComponent } from '../../components/task-dialog/task-dialog.component';
 import { TaskReportsComponent } from '../../components/task-reports/task-reports.component';
+import { CalendarViewComponent } from '../../components/calendar-view/calendar-view.component';
 
 interface Task {
   id: number;
@@ -42,7 +43,8 @@ interface Task {
     MatProgressBarModule,
     TaskTrackerComponent,
     KanbanBoardComponent,
-    TaskReportsComponent
+    TaskReportsComponent,
+    CalendarViewComponent
   ],
   templateUrl: './task-management.component.html',
   styleUrls: ['./task-management.component.scss']

@@ -1,0 +1,137 @@
+.mentor-matching-container {
+  padding: 24px;
+  
+  .header {
+    margin-bottom: 24px;
+    
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    p {
+      margin: 8px 0 0;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 16px;
+    }
+  }
+}
+
+.mentors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.mentor-card {
+  position: relative;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  mat-card-header {
+    margin-bottom: 16px;
+    
+    img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .status-icon {
+    font-size: 12px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .match-score {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 8px 12px;
+    border-radius: 16px;
+    text-align: center;
+    color: white;
+    
+    span {
+      display: block;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    
+    small {
+      font-size: 12px;
+    }
+  }
+
+  .expertise-chips {
+    margin: 16px 0;
+    
+    mat-chip-set {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    mat-chip {
+      font-size: 12px;
+    }
+  }
+
+  .mentor-stats {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: rgba(0, 0, 0, 0.6);
+      
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  mat-card-actions {
+    display: flex;
+    gap: 8px;
+    padding: 16px !important;
+    
+    button {
+      flex: 1;
+      
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// Responsive tasarım
+@media (max-width: 768px) {
+  .mentors-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mentor-card {
+    mat-card-actions {
+      flex-direction: column;
+      
+      button {
+        width: 100%;
+      }
+    }
+  }
+} 

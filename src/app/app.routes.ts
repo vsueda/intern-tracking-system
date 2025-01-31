@@ -8,8 +8,16 @@ import { ProjectsComponent } from './features/dashboard/pages/projects/projects.
 import { ProjectDetailComponent } from './features/dashboard/pages/project-detail/project-detail.component';
 import { CodeEditorComponent } from './features/dashboard/pages/code-editor/code-editor.component';
 
-export const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+export const APP_ROUTES: Routes = [
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./features/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)
+  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {

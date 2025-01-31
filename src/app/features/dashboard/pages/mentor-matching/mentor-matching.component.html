@@ -1,0 +1,62 @@
+<div class="mentor-matching-container">
+  <div class="header">
+    <h2>Mentor Eşleştirme</h2>
+    <p>İlgi alanlarınıza ve hedeflerinize uygun mentorlar</p>
+  </div>
+
+  <div class="mentors-grid">
+    <mat-card *ngFor="let mentor of mentors" class="mentor-card">
+      <mat-card-header>
+        <img mat-card-avatar [src]="mentor.imageUrl" [alt]="mentor.name">
+        <mat-card-title>
+          {{ mentor.name }}
+          <mat-icon *ngIf="mentor.availability" 
+                   class="status-icon"
+                   matTooltip="Müsait"
+                   color="accent">circle</mat-icon>
+        </mat-card-title>
+        <mat-card-subtitle>{{ mentor.title }} &#64; {{ mentor.company }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="match-score" [style.background-color]="getMatchScoreColor(mentor.matchScore)">
+          <span>%{{ mentor.matchScore }}</span>
+          <small>Eşleşme</small>
+        </div>
+
+        <div class="expertise-chips">
+          <mat-chip-set>
+            <mat-chip *ngFor="let skill of mentor.expertise">{{ skill }}</mat-chip>
+          </mat-chip-set>
+        </div>
+
+        <div class="mentor-stats">
+          <div class="stat">
+            <mat-icon>star</mat-icon>
+            <span>{{ mentor.rating }}/5</span>
+          </div>
+          <div class="stat">
+            <mat-icon>work</mat-icon>
+            <span>{{ mentor.experience }} yıl</span>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-flat-button 
+                color="primary" 
+                [disabled]="!mentor.availability"
+                (click)="sendMentorRequest(mentor.id)">
+          <mat-icon>handshake</mat-icon>
+          Mentorluk Talebi Gönder
+        </button>
+        <button mat-button 
+                color="accent"
+                (click)="viewMentorProfile(mentor.id)">
+          <mat-icon>info</mat-icon>
+          Profili İncele
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div> 

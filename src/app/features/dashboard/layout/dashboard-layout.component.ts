@@ -22,25 +22,33 @@ import { MatToolbarModule } from '@angular/material/toolbar';
       <mat-sidenav #drawer class="sidenav" mode="side" opened>
         <mat-toolbar>Staj Portalı</mat-toolbar>
         <mat-nav-list>
-          <a mat-list-item routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a mat-list-item routerLink="overview" routerLinkActive="active">
             <mat-icon matListItemIcon>dashboard</mat-icon>
             <span matListItemTitle>Genel Bakış</span>
           </a>
-          <a mat-list-item routerLink="/dashboard/projects" routerLinkActive="active">
+          <a mat-list-item routerLink="projects" routerLinkActive="active">
             <mat-icon matListItemIcon>folder</mat-icon>
             <span matListItemTitle>Projeler</span>
           </a>
-          <a mat-list-item routerLink="/dashboard/tasks" routerLinkActive="active">
+          <a mat-list-item routerLink="tasks" routerLinkActive="active">
             <mat-icon matListItemIcon>assignment</mat-icon>
             <span matListItemTitle>İş Takibi</span>
           </a>
-          <a mat-list-item routerLink="/dashboard/code-challenge" routerLinkActive="active">
+          <a mat-list-item routerLink="code-challenge" routerLinkActive="active">
             <mat-icon matListItemIcon>code</mat-icon>
             <span matListItemTitle>Kod Challenge</span>
           </a>
-          <a mat-list-item routerLink="/dashboard/challenge-management" routerLinkActive="active">
+          <a mat-list-item routerLink="challenge-management" routerLinkActive="active">
             <mat-icon matListItemIcon>settings</mat-icon>
             <span matListItemTitle>Challenge Yönetimi</span>
+          </a>
+          <a mat-list-item routerLink="mentors" routerLinkActive="active">
+            <mat-icon matListItemIcon>people</mat-icon>
+            <span matListItemTitle>Mentorlar</span>
+          </a>
+          <a mat-list-item routerLink="communication" routerLinkActive="active">
+            <mat-icon matListItemIcon>chat</mat-icon>
+            <span matListItemTitle>İletişim</span>
           </a>
         </mat-nav-list>
       </mat-sidenav>
@@ -60,7 +68,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     }
 
     .active {
-      background: rgba(0,0,0,0.04);
+      background-color: #e3f2fd !important;
+      color: #1976d2 !important;
+      border-left: 4px solid #1976d2;
+    }
+
+    .active mat-icon {
+      color: #1976d2;
     }
 
     mat-toolbar {
@@ -70,6 +84,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     mat-sidenav-content {
       padding: 20px;
       background: #fafafa;
+    }
+
+    a[mat-list-item] {
+      border-left: 4px solid transparent;
     }
   `]
 })

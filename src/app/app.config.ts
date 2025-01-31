@@ -1,27 +1,31 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
+import { APP_ROUTES } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { MonacoEditorModule } from '@materia-ui/ngx-monaco-editor';
 
-export const appConfig = {
+interface ExtendedApplicationConfig extends ApplicationConfig {
+  production: boolean;
+  monacoConfig: {
+    defaultOptions: any;
+  };
+}
+
+export const appConfig: ExtendedApplicationConfig = {
   providers: [
-    provideRouter(routes),
-    provideClientHydration(),
+    provideRouter(APP_ROUTES),
     provideAnimations(),
-    importProvidersFrom(MonacoEditorModule)
+    provideClientHydration()
   ],
   production: false,
   monacoConfig: {
-    baseUrl: './assets',
     defaultOptions: {
-      scrollBeyondLastLine: false,
       theme: 'vs-dark',
-      language: 'javascript',
-      fontSize: 14,
+      language: 'typescript',
       automaticLayout: true,
-      minimap: { enabled: false }
+      minimap: {
+        enabled: false
+      }
     }
   }
 };
