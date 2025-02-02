@@ -119,6 +119,18 @@
   }
 }
 
+.filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  
+  mat-form-field {
+    flex: 1;
+    min-width: 200px;
+  }
+}
+
 // Responsive tasarım
 @media (max-width: 768px) {
   .mentors-grid {

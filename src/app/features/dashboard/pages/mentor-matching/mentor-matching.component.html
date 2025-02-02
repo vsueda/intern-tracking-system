@@ -4,8 +4,36 @@
     <p>İlgi alanlarınıza ve hedeflerinize uygun mentorlar</p>
   </div>
 
+  <div class="filters">
+    <mat-form-field appearance="outline">
+      <mat-label>Mentor Ara</mat-label>
+      <input matInput [(ngModel)]="searchText" 
+             (ngModelChange)="filterMentors()"
+             placeholder="İsim veya uzmanlık alanı...">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Uzmanlık Alanı</mat-label>
+      <mat-select [(ngModel)]="selectedExpertise" (ngModelChange)="filterMentors()" multiple>
+        <mat-option *ngFor="let expertise of expertiseAreas" [value]="expertise">
+          {{expertise}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Sıralama</mat-label>
+      <mat-select [(ngModel)]="sortBy" (ngModelChange)="filterMentors()">
+        <mat-option value="match">Eşleşme Oranına Göre</mat-option>
+        <mat-option value="rating">Değerlendirmeye Göre</mat-option>
+        <mat-option value="experience">Deneyime Göre</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
   <div class="mentors-grid">
-    <mat-card *ngFor="let mentor of mentors" class="mentor-card">
+    <mat-card *ngFor="let mentor of filteredMentors" class="mentor-card">
       <mat-card-header>
         <img mat-card-avatar [src]="mentor.imageUrl" [alt]="mentor.name">
         <mat-card-title>
